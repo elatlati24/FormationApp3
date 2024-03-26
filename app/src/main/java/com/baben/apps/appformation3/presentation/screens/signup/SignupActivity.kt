@@ -30,7 +30,6 @@ class SignupActivity : BaseActivities() {
         startActivity(Intent(context, LoginActivity::class.java))
         finish()
     }
-
     private fun onBackButtonClicked(view: View?) {
         finish()
     }
