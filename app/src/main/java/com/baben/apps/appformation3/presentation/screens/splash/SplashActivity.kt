@@ -40,7 +40,7 @@ class SplashActivity : BaseActivities() {
     }
 
     private fun displayNextScreen() {
-        //TODO
+        //TODO Si l'utilisateur est déjà connecté, accédez à HomeActivity, sinon accédez à LoginActivity
         preferences = getSharedPreferences("app_preferences", Context.MODE_PRIVATE)
 
         val isLoggedIn = preferences.getBoolean(PREF_USER_LOGGED_IN, false)
