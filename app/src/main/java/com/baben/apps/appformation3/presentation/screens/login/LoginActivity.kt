@@ -25,7 +25,7 @@ class LoginActivity : BaseActivities() {
     }
 
     private fun onLoginButtonClicked(view: View?) {
-       // TODO("implement real login action")
+        // TODO("implement real login action")
         startActivity(Intent(context, HomeActivity::class.java))
         finish()
     }
