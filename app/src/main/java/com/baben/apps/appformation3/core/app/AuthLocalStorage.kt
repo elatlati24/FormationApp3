@@ -1,17 +1,21 @@
 package com.baben.apps.appformation3.core.app
 
 class AuthLocalStorage {
+
+
     private var token: String? = null
 
-    fun enregistrerToken(token: String) {
+    fun setToken(token: String) {
         this.token = token
     }
 
-    fun rendreToken(): String? {
+    fun getToken(): String? {
         return token
     }
 
-    fun estConnecte(): Boolean {
+    fun isLoggedIn(): Boolean {
         return token != null
     }
 }
+
+
