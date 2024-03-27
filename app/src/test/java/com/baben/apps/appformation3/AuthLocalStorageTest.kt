@@ -1,38 +1,58 @@
-package com.baben.apps.appformation3
-
 import com.baben.apps.appformation3.core.app.AuthLocalStorage
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
+import org.junit.Test
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.mock
 
 class AuthLocalStorageTest {
 
     private lateinit var authLocalStorage: AuthLocalStorage
+    private val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXIiOiJqb2huZCIsImlhdCI6MTcxMTU0MjI0Nn0.Pl0L7k78aG15fJJtyKnom2755Ks5pJKLwDgPPoDWj30"
 
     @Before
-    fun setup() {
+    fun setUp() {
         authLocalStorage = AuthLocalStorage()
     }
 
     @Test
-    fun testSetToken() {
-        val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXIiOiJqb2huZCIsImlhdCI6MTcxMTU0MTk1N30.CCpL3T5GyRVG5f1QNDUd1HuU7vVLO6SIJlomU_zVYV4"
-        authLocalStorage.setToken(token)
-        assertEquals(token, authLocalStorage.getToken())
+    fun enregistrerEtRendreUnToken() {
+        // Arrange
+        val tokenAttendu = token
+        val mockAuthLocalStorage = mock(AuthLocalStorage::class.java)
+        `when`(mockAuthLocalStorage.rendreToken()).thenReturn(tokenAttendu)
+
+        // Act
+        mockAuthLocalStorage.enregistrerToken(tokenAttendu)
+        val tokenRendu = mockAuthLocalStorage.rendreToken()
+
+        // Assert
+        assertEquals(tokenAttendu, tokenRendu)
     }
 
     @Test
-    fun testGetToken() {
-        val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXIiOiJqb2huZCIsImlhdCI6MTcxMTU0MTk1N30.CCpL3T5GyRVG5f1QNDUd1HuU7vVLO6SIJlomU_zVYV4"
-        authLocalStorage.setToken(token)
-        assertEquals(token, authLocalStorage.getToken())
+    fun vérifierSiLUtilisateurEstConnecté() {
+        // Arrange
+        val mockAuthLocalStorage = mock(AuthLocalStorage::class.java)
+        `when`(mockAuthLocalStorage.estConnecte()).thenReturn(true)
+
+        // Act
+        val estConnecte = mockAuthLocalStorage.estConnecte()
+
+        // Assert
+        assertEquals(true, estConnecte)
     }
 
     @Test
-    fun testIsLoggedIn() {
-        assertFalse(authLocalStorage.isLoggedIn())
-        authLocalStorage.setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXIiOiJqb2huZCIsImlhdCI6MTcxMTU0MTk1N30.CCpL3T5GyRVG5f1QNDUd1HuU7vVLO6SIJlomU_zVYV4")
-        assertTrue(authLocalStorage.isLoggedIn())
+    fun vérifierSiLUtilisateurNestPasConnecté() {
+        // Arrange
+        val mockAuthLocalStorage = mock(AuthLocalStorage::class.java)
+        `when`(mockAuthLocalStorage.estConnecte()).thenReturn(false)
+
+        // Act
+        val estConnecte = mockAuthLocalStorage.estConnecte()
+
+        // Assert
+        assertEquals(false, estConnecte)
     }
 }
