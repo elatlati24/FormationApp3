@@ -62,7 +62,9 @@ dependencies {
     //https://github.com/google/gson
     implementation("com.google.code.gson:gson:2.10.1")
 
-    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
-    implementation ("group: com.squareup.retrofit2', name: 'retrofit', version: '2.10.0'")
+    implementation ("com.squareup.retrofit2:retrofit:2.10.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.10.0")
+
+
 
 }
